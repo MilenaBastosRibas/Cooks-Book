@@ -1,0 +1,66 @@
+ion-content{
+    --background: #FAF78F;
+
+    #salvarEdicaoIngrediente {
+        --margin-top: 20px;
+        --border-radius: 50px;
+        text-align: center;
+        margin-left: 85px;
+        margin-right: 85px;
+        margin-bottom: 20px;
+    }
+
+    ion-card{
+        height:45%;
+    }
+}
+
+ion-toolbar {
+    --border-width: 0 !important;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    
+    ion-title {
+      font-size: 18px;
+      text-align: center;
+    }
+
+    ion-button {
+        border-radius: 50px;
+        box-shadow: transparent;
+    }
+}
+
+ion-list{
+    ion-item{
+       align-items: center;
+       margin-bottom: 5px;
+
+        ion-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            #ingrediente{
+                margin: 20px 0;
+            }
+        }
+
+        ion-input, ion-select {
+        font-size: 18px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 5px;
+        }
+
+        ion-label{
+            #ingrediente{
+                margin-top: 20px;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+            }
+        } 
+    }
+}

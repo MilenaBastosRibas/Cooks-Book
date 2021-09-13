@@ -1,0 +1,37 @@
+ion-content {
+    --background: #FAF78F;
+
+    ion-card{
+        border: solid 1px #8B4513;
+        margin-top: 30px;
+        align-items: center;
+        
+        ion-item-group{
+            ion-label, ion-item{
+                font-size: 16px;
+                margin-bottom:10px;
+                margin-top:10px;
+                margin-left: 30px;
+            }
+        }
+    }
+}
+
+ion-toolbar {
+    --border-width: 0 !important;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    text-justify: center;
+    
+    ion-title {
+      font-size: 20px;
+      text-align: center;
+      align-items: center;
+    }
+
+    ion-button {
+        border-radius: 50px;
+        box-shadow: transparent;
+    }
+}

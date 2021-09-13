@@ -1,0 +1,41 @@
+ion-content{
+  --background: #FAF78F;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  #botaoCadastrar {
+    --margin-top: 20px;
+    --border-radius: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 50px;
+    margin-right:50px;
+  }
+
+  #card-principal{
+    height: 80%;  
+  }
+  
+}
+
+ion-toolbar {
+  --border-width: 0 !important;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  
+  ion-title {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+ion-item{
+  ion-label{
+    font-size: 15px;
+    text-align: center;
+    color: #DEDEDE;
+  }
+}

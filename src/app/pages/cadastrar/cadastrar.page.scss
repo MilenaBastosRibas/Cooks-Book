@@ -1,0 +1,83 @@
+ion-content {
+    --background: #FAF78F;
+
+    #salvar {
+        --margin-top: 20px;
+        --border-radius: 50px;
+        text-align: center;
+        margin-left: 85px;
+        margin-right: 85px;
+        margin-bottom: 20px;
+    }
+}
+
+ion-toolbar {
+    --border-width: 0 !important;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    
+    ion-title {
+      font-size: 20px;
+      text-align: center;
+    }
+
+    ion-button {
+        border-radius: 50px;
+        box-shadow: transparent;
+    }
+}
+
+ion-list{
+    margin-bottom: 30px;
+
+    ion-item{
+       align-items: center;
+
+       ion-label {
+        display: flex;
+        align-items: center;
+       }
+
+        ion-icon {
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        ion-input, ion-select, ion-datetime, ion-radio-group {
+            font-size: 18px;
+            --padding-top: 15px;
+            --padding-bottom: 10px;
+            --padding-start: 5px;
+        }
+
+        ion-label{
+            #ingrediente{
+                margin-left: 60px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+        } 
+        
+        ion-input{
+            border-bottom: solid 1px #8B4513;
+            height:30px;            
+            margin: 20px 0;            
+        }
+
+        #rendimento{
+            margin-right: 5px;
+            text-align: center;
+        }
+    }    
+
+    #modoPreparo{
+        --padding-start: 10px;
+        border: solid 1px #8B4513;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height:190px;
+    }  
+}

@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button color="primary" fill="clear" (click)="_operacoes.voltar('/home')">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+
+    <ion-title>Cadastrar receita</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item lines="none">
+          <ion-label position="floating">
+            <ion-icon name="restaurant-outline"></ion-icon>
+            Nome da Receita &nbsp;
+            
+            <p style="color: red;">*</p>
+          </ion-label>
+
+          <ion-input type="text" [(ngModel)]="_nomeReceita"></ion-input>
+        </ion-item>
+
+        <ion-radio-group color="secondary" [(ngModel)]="_dieta">
+
+          <ion-list-header>
+            <h2><b>A receita é:</b></h2>
+          </ion-list-header>
+
+          <ion-item lines="none">
+            <ion-label>Vegana</ion-label>
+            <ion-radio slot="start" value=1></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Vegetariana</ion-label>
+            <ion-radio slot="start" value=2></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>Irrestrita</ion-label>
+            <ion-radio slot="start" value=3></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+        <ion-item lines="none">
+          <ion-label>
+            <ion-icon name="stopwatch-outline"></ion-icon>
+            Tempo de preparo:
+          </ion-label>
+
+          <ion-datetime 
+            [(ngModel)]="_tempoPreparo" 
+            displayFormat="HH:mm:ss" 
+            min="00:05:00" 
+            max="72:00:00"
+          ></ion-datetime>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            Rendimento:
+          </ion-label>
+
+          <ion-input id="rendimento" type="number" [(ngModel)]="_rendimento"></ion-input>
+          <ion-label>
+            porções.
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>
+            <b id="ingrediente">INGREDIENTES &nbsp;</b>
+            <p style="color: red;">*</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+
+          <ion-input id="quantidade" placeholder="Quantidade" type="text" [(ngModel)]="_quantidade" clearInput>
+          </ion-input>
+
+          <ion-select [(ngModel)]="_unidadeMedida" clearInput>
+            <ion-select-option value="colher(es) de sopa">
+              Colher(es) de sopa
+            </ion-select-option>
+
+            <ion-select-option value="colher(es) de cha">
+              Colher(es) de chá
+            </ion-select-option>
+
+            <ion-select-option value="colher(es) de cafe">
+              Colher(es) de café
+            </ion-select-option>
+
+            <ion-select-option value="colher(es) de sobremesa">
+              Colher(es) de sobremesa
+            </ion-select-option>
+
+            <ion-select-option value="xícara(s)">
+              Xícara(s)
+            </ion-select-option>
+
+            <ion-select-option value="ml">
+              Ml(s)
+            </ion-select-option>
+
+            <ion-select-option value="g">
+              Grama(s)
+            </ion-select-option>
+
+            <ion-select-option value="Kg">
+              Quilo(s)
+            </ion-select-option>
+
+            <ion-select-option value="pitada(s)">
+              Pitada(s)
+            </ion-select-option>
+
+            <ion-select-option value="unidade(s)">
+              Unidade(s)
+            </ion-select-option>
+
+            <ion-select-option value="litro(s)">
+              Litro(s)
+            </ion-select-option>
+
+            <ion-select-option value="lata(s)">
+              Lata(s)
+            </ion-select-option>
+          </ion-select>
+
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input id="nomeIngrediente" placeholder="Nome ingrediente" type="text" [(ngModel)]="_nomeIngrediente" clearInput></ion-input>
+        </ion-item>
+
+        <ion-button color="primary" expand="block" (click)="cadastrarIngrediente()">
+          Incluir ingrediente
+        </ion-button>
+
+        <ion-item lines="none">
+          <ion-label>
+            <ion-icon name="albums-outline"></ion-icon>
+            Modo de preparo: &nbsp;
+
+            <p style="color: red;">*</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-textarea id="modoPreparo" rows='10' cols='1' [(ngModel)]="_modoPreparo"></ion-textarea>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button id="salvar" color="primary" expand="block" (click)="cadastrar()">
+    Salvar
+  </ion-button>
+
+</ion-content>

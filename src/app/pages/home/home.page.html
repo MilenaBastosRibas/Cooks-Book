@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img style="width: 200px; height: 80px; margin:auto;"src="/assets/logo.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card id="card-principal">
+    <ion-card>
+      <ion-searchbar placeholder="Pesquisar" [ngModel]="_searchTerm" (ionInput)="filterReceitas($event)" clearInput
+        animated>
+      </ion-searchbar>
+    </ion-card>
+
+    <ion-item lines="none" *ngIf= "_receitaService.getReceitas().length == 0"> 
+      <ion-label>
+        Seu livro de receitas está vazio!
+      </ion-label> 
+    </ion-item>
+
+    <ion-list *ngIf= "_receitaService.getReceitas().length != 0">
+      <ion-item-group *ngFor="let receita of _lista_receitas">        
+        <ion-item>
+          <b (click)="detalhar(receita)">{{receita.getNomeReceita()}}</b>
+
+          <ion-button color="primary" fill="clear" slot="end" (click)="irParaEditar(receita)">
+            <ion-icon name="create"></ion-icon>
+            
+            Editar
+          </ion-button>
+
+          <ion-button color="primary" fill="clear" slot="end" (click)="excluir(receita)">
+            <ion-icon name="trash"></ion-icon>
+            
+            Excluir
+          </ion-button>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+
+  </ion-card>
+
+  <ion-button id="botaoCadastrar" color="primary" fixed="true" (click)="irParaCadastrar()">
+    Cadastrar nova receita
+  </ion-button>
+
+</ion-content>
