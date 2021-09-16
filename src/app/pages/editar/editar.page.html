@@ -9,122 +9,124 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item lines="none">   
-          <ion-label position="floating">
-            <ion-icon name="restaurant-outline"></ion-icon>
-            Nome da Receita:
-          </ion-label>
-    
-          <ion-input type="text" [(ngModel)]="_nomeReceita"></ion-input>
-        </ion-item>
-
-        <ion-radio-group [(ngModel)]="_dieta">
-          <ion-list-header>
-            <h2><b>A receita é:</b></h2>
-          </ion-list-header>
-      
-          <ion-item lines="none">
-            <ion-label>Vegana</ion-label>
-            <ion-radio slot="start" value=1></ion-radio>
-          </ion-item>
-      
-          <ion-item lines="none">
-            <ion-label>Vegetariana</ion-label>
-            <ion-radio slot="start" value=2></ion-radio>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-label>Irrestrita</ion-label>
-            <ion-radio slot="start" value=3></ion-radio>
-          </ion-item>
-
-        </ion-radio-group>
-
-        <ion-item lines="none">
-          <ion-label >
-            <ion-icon name="stopwatch-outline"></ion-icon>
-            Tempo de preparo:            
-          </ion-label>
-
-          <ion-datetime
-            [(ngModel)]="_tempoPreparo"
-            displayFormat="HH:mm:ss"
-            min="00:05:00"
-            max="72:00:00"
-          ></ion-datetime>       
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-label>
-            <ion-icon name="fast-food-outline"></ion-icon>
-            Rendimento:
-          </ion-label>
-
-          <ion-input id="rendimento" type="number" [(ngModel)]="_rendimento"></ion-input>
-          <ion-label>
-            porções.
-          </ion-label>
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-label>
-            <ion-icon name="reader-outline"></ion-icon>
-            Ingredientes:
-          </ion-label>
-
-          <ion-item slot="end" lines="none">
-            <ion-button id="adicionarIngrediente" fill="clear" (click)="irParaAdicionarIngrediente()">
-              <ion-icon name="add-circle-outline"></ion-icon>
-            </ion-button>
-          </ion-item>
-        </ion-item>
-        
+  <form [formGroup]="_formEditar" (ngSubmit)="submitForm()" novalidade>
+    <ion-card>
+      <ion-card-content>
         <ion-list>
-          <ion-item-group *ngFor="let ingrediente of _ingredientes">
+          <ion-item lines="none">   
+            <ion-label position="floating">
+              <ion-icon name="restaurant-outline"></ion-icon>
+              Nome da Receita:
+            </ion-label>
+      
+            <ion-input type="text" formControlName="nomeReceita"></ion-input>
+          </ion-item>
+
+          <ion-radio-group formControlName="dieta">
+            <ion-list-header>
+              <h2><b>A receita é:</b></h2>
+            </ion-list-header>
+        
             <ion-item lines="none">
-        
-              <ion-item lines="none">
-                {{ingrediente.getQuantidade()}}
-                {{ingrediente.getUnidadeMedida()}}
-                de
-                {{ingrediente.getNomeIngrediente()}}
-              </ion-item>
-        
-              <ion-item slot="end" lines="none">
-        
-                <ion-button id="editarIngrediente" fill="clear" (click)="irParaEditarIngrediente(ingrediente)">
-                  <ion-icon slot="icon-only" name="create"></ion-icon>
-                </ion-button>
-        
-                <ion-button id="excluirIngrediente" fill="clear" (click)="excluirIngrediente(ingrediente)">
-                  <ion-icon slot="icon-only" name="trash"></ion-icon>
-                </ion-button>
-        
-              </ion-item>
-        
+              <ion-label>Vegana</ion-label>
+              <ion-radio slot="start" value=1></ion-radio>
             </ion-item>
         
-          </ion-item-group>
+            <ion-item lines="none">
+              <ion-label>Vegetariana</ion-label>
+              <ion-radio slot="start" value=2></ion-radio>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label>Irrestrita</ion-label>
+              <ion-radio slot="start" value=3></ion-radio>
+            </ion-item>
+
+          </ion-radio-group>
+
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="stopwatch-outline"></ion-icon>
+              Tempo de preparo:            
+            </ion-label>
+
+            <ion-datetime
+              formControlName="tempoPreparo"
+              displayFormat="HH:mm:ss"
+              min="00:05:00"
+              max="72:00:00"
+            ></ion-datetime>       
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="fast-food-outline"></ion-icon>
+              Rendimento:
+            </ion-label>
+
+            <ion-input id="rendimento" type="number" formControlName="rendimento"></ion-input>
+            <ion-label>
+              porções.
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="reader-outline"></ion-icon>
+              Ingredientes:
+            </ion-label>
+
+            <ion-item slot="end" lines="none">
+              <ion-button id="adicionarIngrediente" fill="clear" (click)="irParaAdicionarIngrediente()">
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-item>
+          
+          <ion-list>
+            <ion-item-group *ngFor="let ingrediente of _formEditar.value['ingredientes']">
+              <ion-item lines="none">
+          
+                <ion-item lines="none">
+                  {{ingrediente.getQuantidade()}}
+                  {{ingrediente.getUnidadeMedida()}}
+                  de
+                  {{ingrediente.getNomeIngrediente()}}
+                </ion-item>
+          
+                <ion-item slot="end" lines="none">
+          
+                  <ion-button id="editarIngrediente" fill="clear" (click)="irParaEditarIngrediente(ingrediente)">
+                    <ion-icon slot="icon-only" name="create"></ion-icon>
+                  </ion-button>
+          
+                  <ion-button id="excluirIngrediente" fill="clear" (click)="excluirIngrediente(ingrediente)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                  </ion-button>
+          
+                </ion-item>
+          
+              </ion-item>
+          
+            </ion-item-group>
+          </ion-list>
+
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="albums-outline"></ion-icon>
+              Modo de preparo:
+            </ion-label>
+          </ion-item>
+          
+          <ion-textarea id="modoPreparo" rows='10' cols='1' formControlName="modoPreparo"></ion-textarea>
+
         </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-        <ion-item lines="none">
-          <ion-label>
-            <ion-icon name="albums-outline"></ion-icon>
-            Modo de preparo:
-          </ion-label>
-        </ion-item>
-        
-        <ion-textarea id="modoPreparo" rows='10' cols='1' [(ngModel)]="_modoPreparo"></ion-textarea>
-
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button id="botaoSalvar" color="primary" expand="block" (click)="editar()">
-    Salvar
-  </ion-button>
+    <ion-button id="botaoSalvar" color="primary" expand="block" (click)="editar()">
+      Salvar
+    </ion-button>
+  </form>
 
 </ion-content>

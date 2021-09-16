@@ -11,31 +11,18 @@ export class ReceitaService {
 
   constructor( ) {    
     let ingrediente1 = new Ingrediente("6", "kg", "maniva");
-    setTimeout(() => { }, 50);
     let ingrediente2 = new Ingrediente("2", "kg", "toucinho branco");
-    setTimeout(() => { }, 50);
     let ingrediente3 = new Ingrediente("2", "kg", "toucinho defumado");
-    setTimeout(() => { }, 50);
     let ingrediente4 = new Ingrediente("2", "kg", "pé de porco salgado");
-    setTimeout(() => { }, 50);
     let ingrediente5 = new Ingrediente("2", "kg", "orelha de porco salgada");
-    setTimeout(() => { }, 50);
     let ingrediente6 = new Ingrediente("2", "kg", "língua de porco salgada");
-    setTimeout(() => { }, 50);
     let ingrediente7 = new Ingrediente("2", "kg", "rabo de porco salgado");
-    setTimeout(() => { }, 50);
     let ingrediente8 = new Ingrediente("2", "kg", "lombo de porco salgado");
-    setTimeout(() => { }, 50);
     let ingrediente9 = new Ingrediente("2", "kg", "costela de porco salgada");
-    setTimeout(() => { }, 50);
     let ingrediente10 = new Ingrediente("3/2", "kg", "paio");
-    setTimeout(() => { }, 50);
     let ingrediente11 = new Ingrediente("3/2", "kg", "chouriço");
-    setTimeout(() => { }, 50);
     let ingrediente12 = new Ingrediente("3/2", "kg", "linguiça de porco");
-    setTimeout(() => { }, 50);
     let ingrediente13 = new Ingrediente("4", "kg", "bucho de boi");
-    setTimeout(() => { }, 50);
     let ingrediente14 = new Ingrediente("4", "kg", "charque");
 
     this._ingredientes.push(ingrediente1);

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingrediente } from 'src/app/class/ingrediente';
 import { IngredienteService } from 'src/app/services/ingrediente.service';
@@ -12,24 +13,43 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class EditarIngredientePage implements OnInit {
   private _ingrediente: Ingrediente;
-  private _quantidade: string;
-  private _unidadeMedida: string;
   private _nomeIngrediente: string;
   private _editar: boolean = true;
+  private _formEditarIngrediente: FormGroup;
+  private _isSubmitted: boolean = false;
 
   constructor(
     private _router: Router,
     private _toastService: ToastService,
     private _ingredienteService: IngredienteService,
     private _operacoes: OperacoesService,
+    private _formBuilder: FormBuilder,
   ){ }
 
   ngOnInit() {
     const nav = this._router.getCurrentNavigation();
     this._ingrediente = nav.extras.state.objeto;
-    this._quantidade = this._ingrediente.getQuantidade();
-    this._unidadeMedida = this._ingrediente.getUnidadeMedida();
-    this._nomeIngrediente = this._ingrediente.getNomeIngrediente();
+
+    this._formEditarIngrediente = this._formBuilder.group({
+      quantidade:       [this._ingrediente.getQuantidade(), [Validators.required]],
+      unidadeMedida:    [this._ingrediente.getUnidadeMedida(), [Validators.required]],
+      nomeIngrediente:  [this._ingrediente.getNomeIngrediente(), [Validators.required]],
+    });
+  }
+
+  private get errorControl(){
+    return this._formEditarIngrediente.controls;
+  }
+
+  private submitForm(): boolean{
+    this._isSubmitted = true;
+
+    if(!this._formEditarIngrediente.valid){
+      this._toastService.presentToast('Preencha os campos obrigatórios.', 'danger');
+      return false;
+    }else{
+      this.editarIngrediente();
+    }
   }
 
   private alterarEdicao(): void{
@@ -41,13 +61,14 @@ export class EditarIngredientePage implements OnInit {
   }
 
   private editarIngrediente(): void{
-    let ingredienteEditado: Ingrediente = new Ingrediente(this._quantidade, this._unidadeMedida, this._nomeIngrediente);
-    if (this._ingredienteService.editar(this._ingrediente, ingredienteEditado)) {
-      this._toastService.presentToast('Edição efetuada com sucesso!', 'success');
-      this._router.navigate(['/editar']);
-    } else {
-      this._toastService.presentToast('Edição não efetuada - ingrediente inválido.', 'danger');
-    }
+    let ingredienteEditado: Ingrediente = new Ingrediente(
+      this._formEditarIngrediente.value['quantidade'],
+      this._formEditarIngrediente.value['unidadeMedida'],
+      this._formEditarIngrediente.value['nomeIngrediente'],
+    );
+    this._ingredienteService.editar(this._ingrediente, ingredienteEditado);
+    this._toastService.presentToast('Ingrediente editado com sucesso!', 'success');
+    this._router.navigate(['/editar']);
   }
 
   private excluir(): void {

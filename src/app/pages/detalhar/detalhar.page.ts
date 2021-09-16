@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingrediente } from 'src/app/class/ingrediente';
 import { Receita } from 'src/app/class/receita';
@@ -11,27 +12,30 @@ import { OperacoesService } from 'src/app/services/operacoes.service';
 })
 export class DetalharPage implements OnInit {
   private _receita: Receita;
-  private _nomeReceita: string;
-  private _dieta: number;
-  private _tempoPreparo: string;
-  private _rendimento: number;
-  private _modoPreparo: string;
-  private _lista_ingredientes: Ingrediente[];
+  private _formDetalhar: FormGroup;
 
   constructor(
     private _router: Router,
     private _operacoes: OperacoesService,
+    private _formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
     const nav = this._router.getCurrentNavigation();
     this._receita = nav.extras.state.objeto;
-    this._nomeReceita = this._receita.getNomeReceita();
-    this._dieta = this._receita.getDieta();
-    this._tempoPreparo = this._receita.getTempoPreparo();
-    this._rendimento = this._receita.getRendimento();
-    this._modoPreparo = this._receita.getModoPreparo();
-    this._lista_ingredientes = this._receita.getIngredientes();
+   
+    this._formDetalhar = this._formBuilder.group({    
+      nomeReceita:  [this._receita.getNomeReceita(), [Validators.required]],
+      dieta:        [this._receita.getDieta()],
+      tempoPreparo: [this._receita.getTempoPreparo(), [Validators.required]],
+      rendimento:   [this._receita.getRendimento()],
+      modoPreparo:  [this._receita.getModoPreparo(), [Validators.required]],
+      ingredientes: [this._receita.getIngredientes()],
+    });
+  }
+
+  private get errorControl(){
+    return this._formDetalhar.controls;
   }
 
 }

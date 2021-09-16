@@ -37,8 +37,7 @@ export class HomePage {
     this._todasReceitas = this._lista_receitas;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   private irParaCadastrar(): void{
     this._router.navigate(["/cadastrar"])

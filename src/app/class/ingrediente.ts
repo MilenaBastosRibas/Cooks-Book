@@ -3,13 +3,16 @@ export class Ingrediente {
     private _quantidade: string;
     private _unidadeMedida: string;
     private _nomeIngrediente: string;
+    private static _count: number = 1;
+    
 
     constructor(quantidade: string, unidadedeMedida: string, nomeIngrediente: string){
         let chave = new Date;
-        this._id = chave.getTime();
+        this._id = chave.getTime() + Ingrediente._count;
         this._quantidade = quantidade;
         this._unidadeMedida = unidadedeMedida;
         this._nomeIngrediente = nomeIngrediente;
+        Ingrediente._count += 1;
     }
 
     public getId(): number{

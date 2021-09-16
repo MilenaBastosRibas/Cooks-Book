@@ -9,85 +9,87 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Habilitar Edição</ion-label>
-        <ion-toggle (ionChange)="alterarEdicao()" color="primary"></ion-toggle>
-      </ion-item>
-
-      <ion-list>
-        <ion-item lines="none">
-          <ion-label>
-            <b id="ingrediente">INGREDIENTES</b>
-          </ion-label>
+  <form [formGroup]="_formEditarIngrediente" (ngSubmit)="submitForm()" novalidade>
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Habilitar Edição</ion-label>
+          <ion-toggle (ionChange)="alterarEdicao()" color="primary"></ion-toggle>
         </ion-item>
 
-        <ion-item>   
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label>
+              <b id="ingrediente">INGREDIENTES</b>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>   
+          
+            <ion-input id="quantidade" [disabled]="_editar" placeholder="Quantidade" type="text" formControlName="quantidade"></ion-input>
+          
+            <ion-select [disabled]="_editar" formControlName="unidadeMedida">
+              <ion-select-option value="colher(es) de sopa">
+                Colher(es) de sopa
+              </ion-select-option>
         
-          <ion-input [disabled]="_editar" id="quantidade" placeholder="Quantidade" type="text" [(ngModel)]="_quantidade"></ion-input>
-         
-          <ion-select [disabled]="_editar" [(ngModel)]="_unidadeMedida">
-            <ion-select-option value="colher(es) de sopa">
-              Colher(es) de sopa
-            </ion-select-option>
-      
-            <ion-select-option value="colher(es) de chá">
-              Colher(es) de chá
-            </ion-select-option>
-      
-            <ion-select-option value="colher(es) de cafe">
-              Colher(es) de café
-            </ion-select-option>
-      
-            <ion-select-option value="colher(es) de sobremesa">
-              Colher(es) de sobremesa
-            </ion-select-option>
-      
-            <ion-select-option value="xícara(s)">
-              Xícara(s)
-            </ion-select-option>
-      
-            <ion-select-option value="ml(s)">
-              Ml(s)
-            </ion-select-option>
-      
-            <ion-select-option value="g">
-              Grama(s)
-            </ion-select-option>
-      
-            <ion-select-option value="kg">
-              Quilo(s)
-            </ion-select-option>
-      
-            <ion-select-option value="pitada(s)">
-              Pitada(s)
-            </ion-select-option>
-      
-            <ion-select-option value="unidade(s)">
-              Unidade(s)
-            </ion-select-option>
-  
-            <ion-select-option value="litro(s)">
-              Litro(s)
-            </ion-select-option>
-  
-            <ion-select-option value="lata(s)">
-              Lata(s)
-            </ion-select-option>
-          </ion-select>
+              <ion-select-option value="colher(es) de chá">
+                Colher(es) de chá
+              </ion-select-option>
+        
+              <ion-select-option value="colher(es) de cafe">
+                Colher(es) de café
+              </ion-select-option>
+        
+              <ion-select-option value="colher(es) de sobremesa">
+                Colher(es) de sobremesa
+              </ion-select-option>
+        
+              <ion-select-option value="xícara(s)">
+                Xícara(s)
+              </ion-select-option>
+        
+              <ion-select-option value="ml(s)">
+                Ml(s)
+              </ion-select-option>
+        
+              <ion-select-option value="g">
+                Grama(s)
+              </ion-select-option>
+        
+              <ion-select-option value="kg">
+                Quilo(s)
+              </ion-select-option>
+        
+              <ion-select-option value="pitada(s)">
+                Pitada(s)
+              </ion-select-option>
+        
+              <ion-select-option value="unidade(s)">
+                Unidade(s)
+              </ion-select-option>
+    
+              <ion-select-option value="litro(s)">
+                Litro(s)
+              </ion-select-option>
+    
+              <ion-select-option value="lata(s)">
+                Lata(s)
+              </ion-select-option>
+            </ion-select>
 
-        </ion-item>
+          </ion-item>
 
-        <ion-item lines="none">
-          <ion-input [disabled]="_editar" id="nomeIngrediente" placeholder="Nome ingrediente" type="text" [(ngModel)]="_nomeIngrediente"></ion-input>
-        </ion-item>
-             
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+          <ion-item lines="none">
+            <ion-input [disabled]="_editar" id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente"></ion-input>
+          </ion-item>
+              
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-button id="salvarEdicaoIngrediente" color="primary" expand="block" (click)="editarIngrediente()">
-    Salvar
-  </ion-button>
+    <ion-button id="salvarEdicaoIngrediente" color="primary" expand="block" type="submit">
+      Salvar
+    </ion-button>
+  </form>
 </ion-content>
