@@ -52,13 +52,13 @@ ion-list{
             --padding-start: 5px;
         }
 
-        ion-label{
-            #ingrediente{
-                margin-left: 60px;
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-        } 
+       
+        #ingrediente{
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
         ion-input{
             border-bottom: solid 1px #8B4513;
