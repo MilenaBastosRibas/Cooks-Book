@@ -61,7 +61,7 @@ export class CadastrarPage implements OnInit{
     this._isSubmitted = true;
 
     if(!this._formCadastrar.valid){
-      this._toastService.presentToast('Preencha os campos obrigatórios.', 'danger');
+      this._toastService.presentToast('Todos os campos obrigatórios.', 'danger');
       return false;
     }else{
       this.cadastrar();

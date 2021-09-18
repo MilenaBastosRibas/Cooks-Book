@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inscrever</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <form [formGroup]= "_formInscrever" (ngSubmit)= "submitForm()" novalidate>
+    <ion-item>   
+      <ion-label position="floating">
+        <ion-icon name="mail-outline"></ion-icon>
+        E-mail
+      </ion-label>
+
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <span *ngIf = "_isSubmitted && errorControl.email.errors?.required">
+      *Preencher o email é obrigatório!
+    </span>
+    <span *ngIf = "_isSubmitted && errorControl.email.errors?.email">
+      *Formato de email inválido!
+    </span>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="key-outline"></ion-icon>
+        Senha
+      </ion-label>
+      
+      <ion-input type="password" formControlName="senha"></ion-input>
+    </ion-item>
+    <span *ngIf = "_isSubmitted && errorControl.senha.errors?.required">
+      *Preencher a senha é obrigatório!
+    </span>
+    <span *ngIf = "_isSubmitted && errorControl.senha.errors?.minLength">
+      *A senha é de no mínimo 6 caracteres!
+    </span>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="key-outline"></ion-icon>
+        Confirmar Senha
+      </ion-label>
+      
+      <ion-input type="password" formControlName="confSenha"></ion-input>
+    </ion-item>
+    <span *ngIf = "_isSubmitted && errorControl.confSenha.errors?.required">
+      *Preencher a confirmação da senha é obrigatório!
+    </span>
+    <span *ngIf = "_isSubmitted && errorControl.confSenha.errors?.minLength">
+      *A confirmação da senha é de no mínimo 6 caracteres!
+    </span>
+    <span *ngIf = "_isSubmitted && this._formInscrever.value['senha'] != this._formInscrever.value['confSenha']">
+      *As senhas não são correspondentes!
+    </span>
+
+    <ion-button color="success" expand="full" type="submit">
+      Cadastrar 
+
+      <ion-icon slot="end" name="create-outline"></ion-icon>
+    </ion-button>
+
+    </form>
+  </ion-list>  
+</ion-content>

@@ -22,6 +22,10 @@
             </ion-label>
 
             <ion-input type="text" formControlName="nomeReceita"></ion-input>
+
+            <span *ngIf = "_isSubmitted && errorControl.nomeReceita.errors?.required">
+              *Nome da receita é obrigatório!
+            </span>
           </ion-item>
 
           <ion-radio-group color="secondary" formControlName="dieta">
@@ -58,6 +62,10 @@
               min="00:05:00" 
               max="72:00:00"
             ></ion-datetime>
+
+            <span *ngIf = "_isSubmitted && errorControl.tempoPreparo.errors?.required">
+              *Tempo de preparo é obrigatório!
+            </span>
           </ion-item>
 
           <ion-item lines="none">
@@ -80,8 +88,11 @@
           <form [formGroup]="_formCadastrarIngrediente" (ngSubmit)="submitFormIngrediente()" novalidate>
             <ion-item lines="none">
 
-              <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade" clearInput>
-              </ion-input>
+              <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade" clearInput></ion-input>
+
+              <span *ngIf = "_isSubmitted && errorControl._formCadastrarIngrediente.value['quantidade'].errors?.required">
+                *Quantidade é obrigatório!
+              </span>
 
               <ion-select formControlName="unidadeMedida" clearInput>
                 <ion-select-option value="colher(es) de sopa">
@@ -133,11 +144,18 @@
                 </ion-select-option>
               </ion-select>
 
+              <span *ngIf = "_isSubmitted && errorControl.unidadeMedida.errors?.required">
+                *Unidade de medida é obrigatório!
+              </span>
             </ion-item>
           
 
             <ion-item lines="none">
               <ion-input id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente" clearInput></ion-input>
+            
+              <span *ngIf = "_isSubmitted && errorControl.nomeIngrediente.errors?.required">
+                *Nome do ingrediente é obrigatório!
+              </span>
             </ion-item>
 
             <ion-button color="primary" expand="block" type="submit">
@@ -154,6 +172,10 @@
           </ion-item>
 
           <ion-textarea id="modoPreparo" rows='10' cols='1' formControlName="modoPreparo"></ion-textarea>
+
+          <span *ngIf = "_isSubmitted && errorControl.modoPreparo.errors?.required">
+            *Modo de preparo é obrigatório!
+          </span>
 
         </ion-list>
       </ion-card-content>

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'entrar',
     pathMatch: 'full'
   },
   {
@@ -30,6 +30,14 @@ const routes: Routes = [
   {
     path: 'adicionar-ingrediente',
     loadChildren: () => import('./pages/adicionar-ingrediente/adicionar-ingrediente.module').then( m => m.AdicionarIngredientePageModule)
+  },
+  {
+    path: 'entrar',
+    loadChildren: () => import('./pages/entrar/entrar.module').then( m => m.EntrarPageModule)
+  },
+  {
+    path: 'inscrever',
+    loadChildren: () => import('./pages/inscrever/inscrever.module').then( m => m.InscreverPageModule)
   },
 ];
 

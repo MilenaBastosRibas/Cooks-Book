@@ -41,7 +41,7 @@ export class EditarPage implements OnInit {
     });
 
     this._ingredienteService.copia(this._receita);
-    // console.log(this._formEditar.value['ingredientes'])
+    // console.log(this._formEditar)
   }
 
   private submitForm() : boolean{
