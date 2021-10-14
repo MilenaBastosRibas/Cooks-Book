@@ -26,13 +26,13 @@
 
           <ion-item>   
           
-            <ion-input id="quantidade" [disabled]="_editar" placeholder="Quantidade" type="text" formControlName="quantidade"></ion-input>
+            <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade"></ion-input>
             
             <span *ngIf = "_isSubmitted && errorControl.quantidade.errors?.required">
               *Quantidade é obrigatória!
             </span>
 
-            <ion-select [disabled]="_editar" formControlName="unidadeMedida">
+            <ion-select formControlName="unidadeMedida">
               <ion-select-option value="colher(es) de sopa">
                 Colher(es) de sopa
               </ion-select-option>
@@ -89,7 +89,7 @@
           </ion-item>
 
           <ion-item lines="none">
-            <ion-input [disabled]="_editar" id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente"></ion-input>
+            <ion-input id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente"></ion-input>
             
             <span *ngIf = "_isSubmitted && errorControl.nomeIngrediente.errors?.required">
               *Nome do ingrediente é obrigatório!

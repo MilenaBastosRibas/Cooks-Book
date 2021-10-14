@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControlOptions } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingrediente } from 'src/app/class/ingrediente';
 import { IngredienteService } from 'src/app/services/ingrediente.service';
@@ -14,7 +14,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class EditarIngredientePage implements OnInit {
   private _ingrediente: Ingrediente;
   private _nomeIngrediente: string;
-  private _editar: boolean = true;
+  private _editar: boolean = false;
   private _formEditarIngrediente: FormGroup;
   private _isSubmitted: boolean = false;
 
@@ -31,10 +31,11 @@ export class EditarIngredientePage implements OnInit {
     this._ingrediente = nav.extras.state.objeto;
 
     this._formEditarIngrediente = this._formBuilder.group({
-      quantidade:       [this._ingrediente.getQuantidade(), [Validators.required]],
-      unidadeMedida:    [this._ingrediente.getUnidadeMedida(), [Validators.required]],
-      nomeIngrediente:  [this._ingrediente.getNomeIngrediente(), [Validators.required]],
+      quantidade:       [this._ingrediente.quantidade, [Validators.required]],
+      unidadeMedida:    [this._ingrediente.unidadeMedida, [Validators.required]],
+      nomeIngrediente:  [this._ingrediente.nomeIngrediente, [Validators.required]],
     });
+    this._formEditarIngrediente.disable();
   }
 
   private get errorControl(){
@@ -52,10 +53,12 @@ export class EditarIngredientePage implements OnInit {
     }
   }
 
-  private alterarEdicao(): void{
-    if(this._editar == true){
+  public alterarEdicao(): void{
+    if (this._editar) {
+      this._formEditarIngrediente.disable();
       this._editar = false;
-    }else{
+    } else {
+      this._formEditarIngrediente.enable();
       this._editar = true;
     }
   }

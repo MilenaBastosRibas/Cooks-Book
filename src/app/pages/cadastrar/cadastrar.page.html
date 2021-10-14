@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button color="primary" fill="clear" (click)="_operacoes.voltar('/home')">
+    <ion-button color="primary" fill="clear" (click)="operacoes.voltar('/home')">
       <ion-icon name="chevron-back-outline"></ion-icon>
     </ion-button>
 
@@ -89,10 +89,10 @@
             <ion-item lines="none">
 
               <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade" clearInput></ion-input>
-
+<!-- 
               <span *ngIf = "_isSubmitted && errorControl._formCadastrarIngrediente.value['quantidade'].errors?.required">
                 *Quantidade é obrigatório!
-              </span>
+              </span> -->
 
               <ion-select formControlName="unidadeMedida" clearInput>
                 <ion-select-option value="colher(es) de sopa">
@@ -144,18 +144,18 @@
                 </ion-select-option>
               </ion-select>
 
-              <span *ngIf = "_isSubmitted && errorControl.unidadeMedida.errors?.required">
+              <!-- <span *ngIf = "_isSubmitted && errorControl.unidadeMedida.errors?.required">
                 *Unidade de medida é obrigatório!
-              </span>
+              </span> -->
             </ion-item>
           
 
             <ion-item lines="none">
               <ion-input id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente" clearInput></ion-input>
             
-              <span *ngIf = "_isSubmitted && errorControl.nomeIngrediente.errors?.required">
+              <!-- <span *ngIf = "_isSubmitted && errorControl.nomeIngrediente.errors?.required">
                 *Nome do ingrediente é obrigatório!
-              </span>
+              </span> -->
             </ion-item>
 
             <ion-button color="primary" expand="block" type="submit">
@@ -181,6 +181,15 @@
       </ion-card-content>
     </ion-card>
 
+    <ion-item lines="none">
+      <ion-label>Imagem</ion-label>
+      <ion-button color="success">
+        <input type="file" (change)="upload($event.target.files)">
+      </ion-button>
+      <ion-item *ngFor="let img of lista_imagens">
+        <ion-input type="text" hidden formControlName="imagem" value="{{img.url}}"></ion-input>
+      </ion-item>
+    </ion-item>
     <ion-button id="salvar" color="primary" expand="block" type="submit">
       Salvar
     </ion-button>

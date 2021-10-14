@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { OperacoesService } from 'src/app/services/operacoes.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class InscreverPage implements OnInit {
     public formBuilder: FormBuilder,
     public authService: AuthService,
     private _toastService: ToastService,
+    public operacoes: OperacoesService,
   ) { }
 
   ngOnInit() {

@@ -2,3 +2,47 @@ span{
     color: red;
     font-size: 12px;
 }
+
+ion-content {
+    --background: #FAF78F;
+
+    #entrar {
+        margin-top: 20px;        
+        margin-bottom: 25px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: center;
+    }
+}
+
+ion-button{
+    margin-top: 20px;
+    --border-radius: 95%;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-card{   
+    align-items: center;
+    text-align: center;
+    margin-right: 25px;
+    margin-left: 25px;
+    height: 90%;
+    border-radius: 30px;
+}
+
+ion-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 25px;
+}
+
+ion-input{
+    margin-right: 25px;
+    margin-left: 25px;
+}

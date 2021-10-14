@@ -1,56 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <form [formGroup]= "_formLogar" (ngSubmit)= "submitForm()" novalidate>
-    <ion-item>   
-      <ion-label position="floating">
-        <ion-icon name="mail-outline"></ion-icon>
-        E-mail
-      </ion-label>
+  <ion-card>
+    <ion-img style="width: 200px; height: 180px; margin:auto;" src="/assets/logo.png"></ion-img>
 
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <span *ngIf = "_isSubmitted && errorControl.email.errors?.required">
-      *Preencher o email é obrigatório!
-    </span>
-    <span *ngIf = "_isSubmitted && errorControl.email.errors?.email">
-      *Formato de email inválido!
-    </span>
+    <form [formGroup]="_formLogar" (ngSubmit)="submitForm()" novalidate>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="mail-outline"></ion-icon>
+            E-mail
+          </ion-label>
 
-    <ion-item>
-      <ion-label position="floating">
-        <ion-icon name="key-outline"></ion-icon>
-        Senha
-      </ion-label>
-      
-      <ion-input type="password" formControlName="senha"></ion-input>
-    </ion-item>
-    <span *ngIf = "_isSubmitted && errorControl.senha.errors?.required">
-      *Preencher a senha é obrigatório!
-    </span>
-    <span *ngIf = "_isSubmitted && errorControl.senha.errors?.minLength">
-      *A senha é de no mínimo 6 caracteres!
-    </span>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <span *ngIf="_isSubmitted && errorControl.email.errors?.required">
+          *Preencher o email é obrigatório!
+        </span>
+        <span *ngIf="_isSubmitted && errorControl.email.errors?.email">
+          *Formato de email inválido!
+        </span>
 
-    <ion-button color="success" expand="full" type="submit">
-      Entrar
+        <ion-item>
+          <ion-label position="floating">
+            <ion-icon name="key-outline"></ion-icon>
+            Senha
+          </ion-label>
 
-      <ion-icon slot="end" name="log-in-outline"></ion-icon>
-    </ion-button>
+          <ion-input type="password" formControlName="senha"></ion-input>
+        </ion-item>
+        <span *ngIf="_isSubmitted && errorControl.senha.errors?.required">
+          *Preencher a senha é obrigatório!
+        </span>
+        <span *ngIf="_isSubmitted && errorControl.senha.errors?.minLength">
+          *A senha é de no mínimo 6 caracteres!
+        </span>
 
-    <ion-button color="danger" expand="full" (click)="_signInGoogle()">
-      Entrar com Google
+        <ion-button id="entrar" color="primary" expand="full" type="submit">
+          Entrar
 
-      <ion-icon slot="end" name="logo-google"></ion-icon>
-    </ion-button>
+        </ion-button>
 
+        <ion-button color="primary" (click)="_signInGoogle()">
+
+          <ion-icon name="logo-google"></ion-icon>
+        </ion-button>
+
+        <ion-button color="primary" (click)="_signInFacebook()">
+
+          <ion-icon  name="logo-facebook"></ion-icon>
+        </ion-button>
+
+        <ion-button color="primary" (click)="_signInTwitter()">
+
+          <ion-icon name="logo-twitter"></ion-icon>
+        </ion-button>
+      </ion-list> 
     </form>
 
-    <a (click)="irParaSignUp()">Criar nova conta</a>
-  </ion-list>  
+    <a (click)="irParaSignUp()"><u>Criar nova conta</u></a>
+  </ion-card>
 </ion-content>

@@ -6,7 +6,7 @@ import { Receita } from '../class/receita';
   providedIn: 'root'
 })
 export class IngredienteService {
-  private _ingredientes : Ingrediente[] = [];
+  private _ingredientes : any[] = [];
 
   constructor() { }
 
@@ -23,24 +23,24 @@ export class IngredienteService {
   }
 
   public copia(receita: Receita): void{
-    this._ingredientes = receita.getIngredientes();
+    this._ingredientes = receita.ingredientes;
   }
 
   public editar(ingrediente: Ingrediente, ingredienteEditado: Ingrediente): boolean{
-    for(let i = 0; i < this._ingredientes.length; i++){
-      if((this._ingredientes[i].getId()) == ingrediente.getId()){
-        this._ingredientes[i].setQuantidade(ingredienteEditado.getQuantidade());
-        this._ingredientes[i].setUnidadeMedida(ingredienteEditado.getUnidadeMedida());
-        this._ingredientes[i].setNomeIngrediente(ingredienteEditado.getNomeIngrediente());        
+    for (let i = 0; i < this._ingredientes.length; i++) {
+      if ((this._ingredientes[i].id) == ingrediente.id) {
+        this._ingredientes[i].setQuantidade(ingredienteEditado.quantidade);
+        this._ingredientes[i].setUnidadeMedida(ingredienteEditado.unidadeMedida);
+        this._ingredientes[i].setNomeIngrediente(ingredienteEditado.nomeIngrediente);        
         return true;
       }
     }
     return false;
   }
 
-  public excluir(ingrediente: Ingrediente): boolean{
+  public excluir(ingrediente: any): boolean{
     for(let i = 0; i < this._ingredientes.length; i++){
-      if((this._ingredientes[i].getId()) == ingrediente.getId()){
+      if((this._ingredientes[i].id) == ingrediente.id){
         this._ingredientes.splice(i, 1);
         return true;
       }

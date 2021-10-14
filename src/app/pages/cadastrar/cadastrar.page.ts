@@ -5,7 +5,7 @@ import { Ingrediente } from 'src/app/class/ingrediente';
 import { Receita } from 'src/app/class/receita';
 import { IngredienteService } from 'src/app/services/ingrediente.service';
 import { OperacoesService } from 'src/app/services/operacoes.service';
-import { ReceitaService } from 'src/app/services/receita.service';
+import { ReceitaCrudService } from 'src/app/services/receita-crud.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -19,16 +19,17 @@ export class CadastrarPage implements OnInit{
   private _formCadastrar: FormGroup;
   private _formCadastrarIngrediente: FormGroup;
   private _isSubmitted: boolean = false;
+  private dados: any;
+  private lista_imagens: any[];
 
   constructor(
     private _router: Router,
     private _toastService: ToastService,
-    private _receitaService: ReceitaService,
+    private _receitaCrud: ReceitaCrudService,
     private _ingredienteService: IngredienteService,
-    private _operacoes: OperacoesService, 
+    public operacoes: OperacoesService, 
     private _formBuilder: FormBuilder,
-  ) {
-  }
+  ) {  }
 
   ngOnInit() {
     this._ingredienteService.setIngredientes(this._ingredientes);
@@ -40,12 +41,24 @@ export class CadastrarPage implements OnInit{
       rendimento:   [''],
       modoPreparo:  ['',[Validators.required]],
       ingrediente:  [''],
+      imagem:       [''], 
     });
 
     this._formCadastrarIngrediente = this._formBuilder.group({
       quantidade:       ['',[Validators.required]],
       unidadeMedida:    ['',[Validators.required]],
       nomeIngrediente:  ['',[Validators.required]],
+    });
+    
+    this.dados = this._receitaCrud.getImages()
+    this.dados.forEach(data => {
+      const lista = data as Array<any>;
+      this.lista_imagens = [];
+      lista.forEach(img => {
+        let nome = img.data.name;
+        let url = img.data.downloadUrl;
+        this.lista_imagens.push({nome:nome, url:url});
+      })
     });
   }
 
@@ -61,7 +74,7 @@ export class CadastrarPage implements OnInit{
     this._isSubmitted = true;
 
     if(!this._formCadastrar.valid){
-      this._toastService.presentToast('Todos os campos obrigatórios.', 'danger');
+      this._toastService.presentToast('Todos os campos são obrigatórios.', 'danger');
       return false;
     }else{
       this.cadastrar();
@@ -74,38 +87,46 @@ export class CadastrarPage implements OnInit{
       this._toastService.presentToast('Todos os campos são obrigatórios.', 'danger');
       return false;
     } else {
-      this.cadastrarIngrediente()
+      this.cadastrarIngrediente();
     }
   }
 
   public cadastrar(): void {
     if(this._ingredienteService.getIngredientes().length != 0) {
-      let tempoPreparoSD = this._formCadastrar.value['tempoPreparo'].split('T')[1];
-      let tempoPreparoSFHpai = tempoPreparoSD.split('-')[0];
-      let tempoPreparoSFH = tempoPreparoSFHpai.split('.')[0];
       const receita: Receita = new Receita(
         this._formCadastrar.value['nomeReceita'],
         this._formCadastrar.value['dieta'],
-        tempoPreparoSFH,
+        this._formCadastrar.value['tempoPreparo'].slice(11, 19),
         this._formCadastrar.value['rendimento'],
         this._formCadastrar.value['modoPreparo'],
         this._ingredienteService.getIngredientes(),
+        this._receitaCrud.getImages(),
       );
-      this._receitaService.inserir(receita);
-      this._toastService.presentToast('Cadastro efetuado com sucesso!', 'success');
-      this._router.navigate(['/home']);
-    }else {
-      this._toastService.presentToast('Adicione um ingrediente.', 'danger');
+
+      this._receitaCrud.createReceita(receita)
+        .then(() => {
+          this._toastService.presentToast('Cadastro efetuado com sucesso!', 'success');
+          this._router.navigate(['/home']);
+        })
+        .catch((error) => {
+          this._toastService.presentToast('Erro ao cadastrar receita.', 'danger');
+          console.log(error.message);
+        });
     }
   }
 
-  public cadastrarIngrediente(): void{
-    let ingrediente: Ingrediente = new Ingrediente(
+  public cadastrarIngrediente(): void {
+    const ingrediente: Ingrediente = new Ingrediente(
       this._formCadastrarIngrediente.value['quantidade'],
       this._formCadastrarIngrediente.value['unidadeMedida'],
       this._formCadastrarIngrediente.value['nomeIngrediente'],
     );
+    
     this._ingredienteService.inserir(ingrediente);
     this._toastService.presentToast('Ingrediente cadastrado com sucesso!', 'success');
+  }
+
+  upload(event: FileList) {
+    this._receitaCrud.uploadStorage(event);
   }
 }

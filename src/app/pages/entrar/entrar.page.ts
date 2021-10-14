@@ -25,7 +25,7 @@ export class EntrarPage implements OnInit {
   ngOnInit() {
     this._formLogar = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]], 
-      senha: ['', [Validators.required, Validators.minLength(6)]], 
+      senha: ['', [Validators.required, Validators.minLength(6)]],
     })
   }
 
@@ -57,6 +57,14 @@ export class EntrarPage implements OnInit {
 
   private _signInGoogle() : void{
     this.authService.signInWithGoogle();
+  }
+
+  private _signInFacebook() : void{
+    this.authService.signInWithFacebook();
+  }
+
+  private _signInTwitter() : void{
+    this.authService.signInWithTwitter();
   }
 
   private irParaSignUp() : void{

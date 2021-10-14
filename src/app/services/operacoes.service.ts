@@ -4,7 +4,8 @@ import { AlertController } from '@ionic/angular';
 import { Ingrediente } from '../class/ingrediente';
 import { Receita } from '../class/receita';
 import { IngredienteService } from './ingrediente.service';
-import { ReceitaService } from './receita.service';
+import { ReceitaCrudService } from './receita-crud.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class OperacoesService {
 
   constructor(
     private _router: Router,
-    private _receitaService: ReceitaService,
+    private _receitaCrud: ReceitaCrudService,
     private _ingredienteService: IngredienteService,
     public alertController: AlertController,
+    private _toastService: ToastService,
   ) { }
 
   public validar(campo : any): boolean{
@@ -43,7 +45,14 @@ export class OperacoesService {
         }, {
           text: 'Sim',
           handler: () => {
-            this._receitaService.excluir(receita);
+            this._receitaCrud.removeReceita(receita.id)
+            .then(() => {
+              this._toastService.presentToast('Exclusão efetuada.', 'success');
+            })
+            .catch((error) => {
+              this._toastService.presentToast('Erro ao excluir.', 'danger');
+              console.log(error.message);
+            });
           }
         }
       ]

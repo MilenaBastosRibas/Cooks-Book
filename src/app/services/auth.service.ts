@@ -2,31 +2,35 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { auth } from 'firebase';
+import { auth } from 'firebase/app';
 import { Usuario } from '../class/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData: Usuario;  
+  userData: Usuario;
+  static count: number = 0;
 
   constructor(
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone,
+
   ) { 
+    //console.log(firebase.User)
     this.ngFireAuth.authState.subscribe((user) => {
-      if(user){
+      AuthService.count +=1;    
+      if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData))
         JSON.parse(localStorage.getItem('user'))
-      }else{
-        localStorage.setItem('user',null)
-        JSON.parse(localStorage.getItem('user'))
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
       }
-    })
+    });
   }
 
   public signIn(email:string, password:string){
@@ -41,12 +45,22 @@ export class AuthService {
     this.AuthLogin(new auth.GoogleAuthProvider())
   }
 
+  public signInWithFacebook(){
+    this.AuthLogin(new auth.FacebookAuthProvider())
+  }
+
+  public signInWithTwitter(){
+    this.AuthLogin(new auth.TwitterAuthProvider())
+  }
+
   public AuthLogin(provider){
     return this.ngFireAuth.signInWithPopup(provider)
     .then((result) => {
       this.ngZone.run(() => {
+        console.log(this.getUserLogado());
         this.router.navigate(['/home'])
-      })    
+      })   
+      this.setUserData(result.user) 
     })
     .catch((error) => {
       console.log(error)
@@ -90,7 +104,7 @@ export class AuthService {
     return this.ngFireAuth.signOut()
     .then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/signIn'])
+      this.router.navigate(['/entrar']);
     })
   }
 }

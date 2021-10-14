@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-img style="width: 200px; height: 80px; margin:auto;"src="/assets/logo.png"></ion-img>
+    <ion-img style="width: 90px; height: 85px; margin:auto;"src="/assets/logo.png"></ion-img>
+
+    <ion-button slot="end" color="primary" fill="clear" (click)="logout()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
 
@@ -13,16 +18,16 @@
       </ion-searchbar>
     </ion-card>
 
-    <ion-item lines="none" *ngIf= "_receitaService.getReceitas().length == 0"> 
+    <ion-item lines="none" *ngIf= "_receitaCrud.getReceitas().length == 0"> 
       <ion-label>
         Seu livro de receitas está vazio!
       </ion-label> 
     </ion-item>
 
-    <ion-list *ngIf= "_receitaService.getReceitas().length != 0">
-      <ion-item-group *ngFor="let receita of _lista_receitas">        
+    <ion-list *ngIf= "_receitaCrud.getReceitas().length != 0">
+      <ion-item-group *ngFor="let receita of _lista_pesquisa">        
         <ion-item>
-          <b (click)="detalhar(receita)">{{receita.getNomeReceita()}}</b>
+          <b (click)="detalhar(receita)">{{ receita.nomeReceita }}</b>
 
           <ion-button color="primary" fill="clear" slot="end" (click)="irParaEditar(receita)">
             <ion-icon name="create"></ion-icon>

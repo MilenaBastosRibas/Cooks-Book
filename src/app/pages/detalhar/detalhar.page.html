@@ -5,67 +5,63 @@
     </ion-button>
 
     <ion-title>
-      {{_formDetalhar.value['nomeReceita']}}
+      {{ receita.nomeReceita }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="_formDetalhar" novalidade>
-    <ion-card>
-      <ion-item-group>
-        <ion-label>
-          <b>Dieta:</b>
-        </ion-label>
+  <ion-card>
+    <ion-item-group>
+      <ion-label>
+        <b>Dieta:</b>
+      </ion-label>
+  
+      <ion-item lines=none *ngIf="receita.dieta === '1'">Vegana</ion-item>
+      <ion-item lines=none *ngIf="receita.dieta === '2'">Vegetariana</ion-item>
+      <ion-item lines=none *ngIf="receita.dieta === '3'">Irrestrita</ion-item>
     
-        <ion-item lines=none *ngIf="_formDetalhar.value['dieta'] == 1">Vegana</ion-item>
-        <ion-item lines=none *ngIf="_formDetalhar.value['dieta'] == 2">Vegetariana</ion-item>
-        <ion-item lines=none *ngIf="_formDetalhar.value['dieta'] == 3">Irrestrita</ion-item>
+  
+      <ion-label>
+        <b>Tempo de preparo:</b>
+      </ion-label>
+  
+      <ion-item lines="none">
+        {{ receita.tempoPreparo }}
+      </ion-item>
       
-    
-        <ion-label>
-          <b>Tempo de preparo:</b>
-        </ion-label>
-    
-        <ion-item lines="none">
-          {{_formDetalhar.value['tempoPreparo']}}
-        </ion-item>
-        
-    
-        <ion-label>
-          <b>Rendimento:</b>
-        </ion-label>
-    
-        <ion-item lines="none">
-          {{_formDetalhar.value['rendimento']}} porções
-        </ion-item>
-        
-    
-        <ion-label>
-          <b>Ingredientes:</b>
-        </ion-label>
-    
-        <ion-list>
-          <ion-item-group *ngFor="let ingrediente of _formDetalhar.value['ingredientes']">
-            <ion-item lines="none">
-              {{ingrediente.getQuantidade()}} 
-              {{ingrediente.getUnidadeMedida()}}
-              de
-              {{ingrediente.getNomeIngrediente()}}
-            </ion-item>
-          </ion-item-group>
-        </ion-list>
-        
-    
-        <ion-label>
-          <b>Modo de preparo:</b>
-        </ion-label>
-    
-        <ion-item lines="none">
-          {{_formDetalhar.value['modoPreparo']}}
-        </ion-item>
-      </ion-item-group>   
-    </ion-card>
-  </form>
-
+  
+      <ion-label>
+        <b>Rendimento:</b>
+      </ion-label>
+  
+      <ion-item lines="none">
+        {{ receita.rendimento }} porções
+      </ion-item>
+      
+  
+      <ion-label>
+        <b>Ingredientes:</b>
+      </ion-label>
+  
+      <ion-list>
+        <ion-item-group *ngFor="let ingrediente of receita._ingredientes">
+          <ion-item lines="none">
+            {{ ingrediente.quantidade }} 
+            {{ ingrediente.unidadeMedida }}
+            de
+            {{ ingrediente.nomeIngrediente }}
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+      
+      <ion-label>
+        <b>Modo de preparo:</b>
+      </ion-label>
+  
+      <ion-item lines="none">
+        {{ receita.modoPreparo }}
+      </ion-item>
+    </ion-item-group>   
+  </ion-card>
 </ion-content>

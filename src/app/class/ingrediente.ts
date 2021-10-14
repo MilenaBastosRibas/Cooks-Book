@@ -3,43 +3,44 @@ export class Ingrediente {
     private _quantidade: string;
     private _unidadeMedida: string;
     private _nomeIngrediente: string;
-    private static _count: number = 1;
     
-
-    constructor(quantidade: string, unidadedeMedida: string, nomeIngrediente: string){
+    constructor(quantidade: string, unidadeMedida: string, nomeIngrediente: string){
         let chave = new Date;
-        this._id = chave.getTime() + Ingrediente._count;
+        this._id = chave.getTime();
         this._quantidade = quantidade;
-        this._unidadeMedida = unidadedeMedida;
+        this._unidadeMedida = unidadeMedida;
         this._nomeIngrediente = nomeIngrediente;
-        Ingrediente._count += 1;
     }
 
-    public getId(): number{
+    public get id(): number{
         return this._id;
     }
 
-    public getQuantidade(): string{
+    public get quantidade(): string{
         return this._quantidade;
     }
 
-    public getUnidadeMedida(): string{
+    public get unidadeMedida(): string{
         return this._unidadeMedida;
     }
 
-    public getNomeIngrediente(): string{
+    public get nomeIngrediente(): string{
         return this._nomeIngrediente;
     }
 
-    public setQuantidade(quantidade: string){
+    public setId(id: any) {
+        this._id = id;
+    }
+
+    public setQuantidade(quantidade: string) {
         this._quantidade = quantidade;
     }
 
-    public setUnidadeMedida(unidadeMedida: string){
+    public setUnidadeMedida(unidadeMedida: string) {
         this._unidadeMedida = unidadeMedida;
     }
 
-    public setNomeIngrediente(nomeIngrediente: string){
+    public setNomeIngrediente(nomeIngrediente: string) {
         this._nomeIngrediente = nomeIngrediente;
     }
 }
