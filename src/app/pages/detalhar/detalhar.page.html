@@ -36,7 +36,7 @@
       </ion-label>
   
       <ion-item lines="none">
-        {{ receita.rendimento }} porções
+        {{ receita.rendimento }} porções.
       </ion-item>
       
   
@@ -61,6 +61,10 @@
   
       <ion-item lines="none">
         {{ receita.modoPreparo }}
+      </ion-item>
+
+      <ion-item id="imagem" lines="none">
+        <img src="{{ receita.imagem }}" alt="">
       </ion-item>
     </ion-item-group>   
   </ion-card>

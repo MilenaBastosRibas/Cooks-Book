@@ -19,7 +19,6 @@ export class AuthService {
     public ngZone: NgZone,
 
   ) { 
-    //console.log(firebase.User)
     this.ngFireAuth.authState.subscribe((user) => {
       AuthService.count +=1;    
       if (user) {
@@ -57,7 +56,7 @@ export class AuthService {
     return this.ngFireAuth.signInWithPopup(provider)
     .then((result) => {
       this.ngZone.run(() => {
-        console.log(this.getUserLogado());
+        // console.log(this.getUserLogado());
         this.router.navigate(['/home'])
       })   
       this.setUserData(result.user) 

@@ -16,7 +16,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class EditarPage implements OnInit {
   private _receita: Receita;
   private _formEditar: FormGroup;
-  private _isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
 
   constructor(
     private _router: Router,
@@ -46,7 +46,7 @@ export class EditarPage implements OnInit {
   }
 
   private submitForm() : boolean{
-    this._isSubmitted = true;
+    this.isSubmitted = true;
 
     if(!this._formEditar.valid){
       this._toastService.presentToast('Todos os campos são obrigatórios.', 'danger');
@@ -64,7 +64,7 @@ export class EditarPage implements OnInit {
       this._formEditar.value['rendimento'],
       this._formEditar.value['modoPreparo'],
       this._ingredienteService.getIngredientes(),
-      this._formEditar.value['imagem'],
+      this._receita.imagem,
     );
     
     this._receitaCrud.editReceita(this._receita.id, receita)

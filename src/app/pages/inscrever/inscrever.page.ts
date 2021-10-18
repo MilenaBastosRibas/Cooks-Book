@@ -13,7 +13,7 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class InscreverPage implements OnInit {
   private _formInscrever: FormGroup;
-  private _isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
   
   constructor(
     public alertController: AlertController, 
@@ -36,8 +36,8 @@ export class InscreverPage implements OnInit {
     return this._formInscrever.controls;
   }
 
-  submitForm() {
-    this._isSubmitted = true;
+  private submitForm() {
+    this.isSubmitted = true;
     if(!this._formInscrever.valid){
       this._toastService.presentToast('Todos os campos são obrigatórios.', 'danger');
       return false;

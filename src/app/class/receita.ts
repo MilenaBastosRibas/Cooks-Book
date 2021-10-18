@@ -81,7 +81,7 @@ export class Receita {
         this._ingredientes = ingredientes;
     }
 
-    public set imagem(value: any) {
+    public setImagem(value: any) {
         this._imagem = value;
-    }
+    } 
 }

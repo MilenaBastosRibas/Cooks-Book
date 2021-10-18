@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button color="primary" fill="clear" (click)="_operacoes.voltar('/editar')">
+    <ion-button color="primary" fill="clear" (click)="operacoes.voltar('/editar')">
       <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
     </ion-button>
 
@@ -28,7 +28,7 @@
           
             <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade"></ion-input>
             
-            <span *ngIf = "_isSubmitted && errorControl.quantidade.errors?.required">
+            <span *ngIf = "isSubmitted && errorControl.quantidade.errors?.required">
               *Quantidade é obrigatória!
             </span>
 
@@ -82,7 +82,7 @@
               </ion-select-option>
             </ion-select>
 
-            <span *ngIf = "_isSubmitted && errorControl.unidadeMedida.errors?.required">
+            <span *ngIf = "isSubmitted && errorControl.unidadeMedida.errors?.required">
               *Unidade de medida é obrigatório!
             </span>
 
@@ -91,7 +91,7 @@
           <ion-item lines="none">
             <ion-input id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente"></ion-input>
             
-            <span *ngIf = "_isSubmitted && errorControl.nomeIngrediente.errors?.required">
+            <span *ngIf = "isSubmitted && errorControl.nomeIngrediente.errors?.required">
               *Nome do ingrediente é obrigatório!
             </span>
           </ion-item>

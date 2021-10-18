@@ -20,5 +20,5 @@ export class DetalharPage implements OnInit {
     const nav = this._router.getCurrentNavigation();
     this.receita = nav.extras.state.objeto;
     console.log(this.receita);
-  }
+  } 
 }

@@ -86,14 +86,15 @@ export class ReceitaCrudService {
 
   uploadStorage(event: FileList) {
     const file = event.item(0)
-    if(file.type.split('/')[0] != 'imagem') {
+    /* if(file.type.split('/')[0] != 'imagem') {
       console.log('Tipo nao suportado')
       return
-    }
+    } */
     this.arquivo = file.name
     const path = `images/${file.name}`
     const fileRef = this.storage.ref(path)
     this.tarefa = this.storage.upload(path, file)
+    console.log(file)
 
     this.tarefa.snapshotChanges().pipe(
       finalize(()=>{
@@ -105,11 +106,12 @@ export class ReceitaCrudService {
         })
       })
     ).subscribe();
-
+    //return this.db.database.ref('images/').push(image)
   }
 
   uploadDatabase(image: ImgData) {
-    return this.db.database.ref('images/').push(image)    
+    console.log(this.db.database.ref('images/'))
+    return this.db.database.ref('images/').push(image)   
   }
 
   getImages() {

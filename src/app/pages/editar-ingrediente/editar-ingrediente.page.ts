@@ -13,16 +13,15 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class EditarIngredientePage implements OnInit {
   private _ingrediente: Ingrediente;
-  private _nomeIngrediente: string;
   private _editar: boolean = false;
   private _formEditarIngrediente: FormGroup;
-  private _isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
 
   constructor(
     private _router: Router,
     private _toastService: ToastService,
     private _ingredienteService: IngredienteService,
-    private _operacoes: OperacoesService,
+    public operacoes: OperacoesService,
     private _formBuilder: FormBuilder,
   ){ }
 
@@ -43,7 +42,7 @@ export class EditarIngredientePage implements OnInit {
   }
 
   private submitForm(): boolean{
-    this._isSubmitted = true;
+    this.isSubmitted = true;
 
     if(!this._formEditarIngrediente.valid){
       this._toastService.presentToast('Preencha os campos obrigatórios.', 'danger');
@@ -53,7 +52,7 @@ export class EditarIngredientePage implements OnInit {
     }
   }
 
-  public alterarEdicao(): void{
+  private alterarEdicao(): void{
     if (this._editar) {
       this._formEditarIngrediente.disable();
       this._editar = false;
@@ -74,7 +73,7 @@ export class EditarIngredientePage implements OnInit {
     this._router.navigate(['/editar']);
   }
 
-  private excluir(): void {
+  protected excluir(): void {
     if (this._ingredienteService.excluir(this._ingrediente)){
       this._toastService.presentToast('Exclusão efetuada com sucesso!', 'success');
     } else{

@@ -80,35 +80,32 @@ export class HomePage {
         this._lista_receitas.push(receita);
         console.log(this._lista_receitas);
       });
-      // colocar aqui as coisas
 
       this._lista_pesquisa = this._lista_receitas;
       this._searchTerm = '';
       this._todasReceitas = this._lista_pesquisa;
-      console.log(this._todasReceitas);
-      console.log(this.authService.getUserLogado())
     });
   }
 
   ngOnInit() { }
 
-  private irParaCadastrar(): void{
+  protected irParaCadastrar(): void{
     this._router.navigate(["/cadastrar"])
   }
 
-  private detalhar(receita):void {
+  protected detalhar(receita):void {
     this._router.navigateByUrl("/detalhar", {state: {objeto:receita}})
   }
 
-  private irParaEditar(receita): void{
+  protected irParaEditar(receita): void{
     this._router.navigateByUrl("/editar", {state: {objeto:receita}})
   }
 
-  private excluir(receita: Receita): void {
+  protected excluir(receita: Receita): void {
     this._operacoes.presentAlertConfirmReceita("Você deseja realmente excluir esta receita?", receita);
   }
 
-  private filterReceitas(receita: any){
+  protected filterReceitas(receita: any){
     let val = receita.target.value;
     if(val && val.trim() != ''){
       this._lista_pesquisa = _.values(this._todasReceitas);
@@ -124,7 +121,7 @@ export class HomePage {
     this.authService.signOut();
   }
 
-  upload(event: FileList) {
+  protected upload(event: FileList) {
     this._receitaCrud.uploadStorage(event);
   }
 }

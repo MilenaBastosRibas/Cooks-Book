@@ -23,7 +23,7 @@
 
             <ion-input type="text" formControlName="nomeReceita"></ion-input>
 
-            <span *ngIf = "_isSubmitted && errorControl.nomeReceita.errors?.required">
+            <span *ngIf = "isSubmitted && errorControl.nomeReceita.errors?.required">
               *Nome da receita é obrigatório!
             </span>
           </ion-item>
@@ -63,7 +63,7 @@
               max="72:00:00"
             ></ion-datetime>
 
-            <span *ngIf = "_isSubmitted && errorControl.tempoPreparo.errors?.required">
+            <span *ngIf = "isSubmitted && errorControl.tempoPreparo.errors?.required">
               *Tempo de preparo é obrigatório!
             </span>
           </ion-item>
@@ -88,13 +88,10 @@
           <form [formGroup]="_formCadastrarIngrediente" (ngSubmit)="submitFormIngrediente()" novalidate>
             <ion-item lines="none">
 
-              <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade" clearInput></ion-input>
-<!-- 
-              <span *ngIf = "_isSubmitted && errorControl._formCadastrarIngrediente.value['quantidade'].errors?.required">
-                *Quantidade é obrigatório!
-              </span> -->
+              <ion-input id="quantidade" placeholder="Quantidade" type="text" formControlName="quantidade"></ion-input>
 
-              <ion-select formControlName="unidadeMedida" clearInput>
+
+              <ion-select formControlName="unidadeMedida">
                 <ion-select-option value="colher(es) de sopa">
                   Colher(es) de sopa
                 </ion-select-option>
@@ -143,19 +140,12 @@
                   Lata(s)
                 </ion-select-option>
               </ion-select>
-
-              <!-- <span *ngIf = "_isSubmitted && errorControl.unidadeMedida.errors?.required">
-                *Unidade de medida é obrigatório!
-              </span> -->
             </ion-item>
           
 
             <ion-item lines="none">
               <ion-input id="nomeIngrediente" placeholder="Nome ingrediente" type="text" formControlName="nomeIngrediente" clearInput></ion-input>
-            
-              <!-- <span *ngIf = "_isSubmitted && errorControl.nomeIngrediente.errors?.required">
-                *Nome do ingrediente é obrigatório!
-              </span> -->
+
             </ion-item>
 
             <ion-button color="primary" expand="block" type="submit">
@@ -173,26 +163,23 @@
 
           <ion-textarea id="modoPreparo" rows='10' cols='1' formControlName="modoPreparo"></ion-textarea>
 
-          <span *ngIf = "_isSubmitted && errorControl.modoPreparo.errors?.required">
-            *Modo de preparo é obrigatório!
-          </span>
-
         </ion-list>
+
       </ion-card-content>
-    </ion-card>
 
-    <ion-item lines="none">
-      <ion-label>Imagem</ion-label>
-      <ion-button color="success">
-        <input type="file" (change)="upload($event.target.files)">
-      </ion-button>
-      <ion-item *ngFor="let img of lista_imagens">
-        <ion-input type="text" hidden formControlName="imagem" value="{{img.url}}"></ion-input>
+      <ion-item lines="none">
+        <ion-label>Imagem</ion-label>
+        <ion-button color="primary">
+          <input type="file" (change)="upload($event.target.files)">
+        </ion-button>
+        <ion-item *ngFor="let img of lista_imagens">
+          <ion-input type="text" hidden formControlName="imagem" value="{{img.url}}"></ion-input>
+        </ion-item>
       </ion-item>
-    </ion-item>
-    <ion-button id="salvar" color="primary" expand="block" type="submit">
-      Salvar
-    </ion-button>
-  </form>
 
+      <ion-button id="salvar" color="primary" expand="block" type="submit">
+        Salvar
+      </ion-button>
+    </ion-card>
+  </form>
 </ion-content>

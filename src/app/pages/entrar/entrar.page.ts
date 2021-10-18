@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class EntrarPage implements OnInit {
   private _formLogar: FormGroup;
-  private _isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
    
   constructor(
     public alertController: AlertController, 
@@ -33,8 +33,8 @@ export class EntrarPage implements OnInit {
     return this._formLogar.controls;
   }
 
-  submitForm() {
-    this._isSubmitted = true;
+  private submitForm() {
+    this.isSubmitted = true;
     if(!this._formLogar.valid){
       this._toastService.presentToast('Todos os campos são obrigatórios.', 'danger');
       return false;
@@ -55,19 +55,19 @@ export class EntrarPage implements OnInit {
     })
   }
 
-  private _signInGoogle() : void{
+  protected _signInGoogle() : void{
     this.authService.signInWithGoogle();
   }
 
-  private _signInFacebook() : void{
+  protected _signInFacebook() : void{
     this.authService.signInWithFacebook();
   }
 
-  private _signInTwitter() : void{
+  protected _signInTwitter() : void{
     this.authService.signInWithTwitter();
   }
 
-  private irParaSignUp() : void{
+  public irParaSignUp() : void{
     this._router.navigate(['/inscrever']);
   }
 }

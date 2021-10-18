@@ -13,13 +13,13 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class AdicionarIngredientePage{
   private _formAdicionarIngrediente: FormGroup;
-  private _isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
   
   constructor(
     private _router: Router,
     private _toastService: ToastService,
     private _ingredienteService: IngredienteService,
-    private _operacoes: OperacoesService,
+    public operacoes: OperacoesService,
     private _formBuilder: FormBuilder,
   ) { }
 
@@ -35,8 +35,8 @@ export class AdicionarIngredientePage{
     return this._formAdicionarIngrediente.controls;
   }
 
-  private submitForm(): boolean{
-    this._isSubmitted = true;
+  public submitForm(): boolean{
+    this.isSubmitted = true;
 
     if(!this._formAdicionarIngrediente.valid){
       this._toastService.presentToast('Preencha os campos obrigatórios.', 'danger');
